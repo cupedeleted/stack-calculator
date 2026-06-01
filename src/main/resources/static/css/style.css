@@ -1,0 +1,188 @@
+/* VARIABLE Regular */
+@font-face {
+    font-family: 'MinecraftFont';
+    src: url('../fonts/MinecraftRegular-Bmg3.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: rgb(150, 150, 150);
+    font-family: sans-serif;
+    text-align-last: auto;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-logo {
+    display: block;
+    max-width: 100%;
+    width: 1000px;
+    margin: 20px auto;
+}
+
+/* 1. La caja grande del formulario */
+.form-container{
+    background-color: #cfcfcf;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    max-width: 800px;
+    margin: 20px auto 0px auto;
+    padding: 25px;
+
+    box-shadow: inset -4px -4px 0px #383938, inset 4px 4px 0px #fff;
+}
+
+/* 2. Estilo interno para que el formulario use Flexbox */
+.form-container form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 0;
+}
+
+/* 3. Organizar las etiquetas arriba de las barras */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: 'MinecraftFont', sans-serif;
+}
+
+/* 4. Estilizar las barras de texto y el selector */
+.form-group input, .form-group select {
+    padding: 10px;
+    font-family: 'MinecraftFont', sans-serif;
+    font-size: 16px;
+    border: 2px solid;
+    background-color: #9d9d9d;
+
+    box-shadow: inset -4px -4px 0px #e4e3e3, inset 4px 4px 0px #bbbaba;
+}
+
+/* 5. El botón estilo piedra de Minecraft */
+.mc-button {
+    padding: 10px 20px;
+    background-color: #929292;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'MinecraftFont', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: inset -2px -2px 0px #373737, inset 2px 2px 0px #ddd;
+}
+
+.mc-button:hover {
+    background-color: #a1a1a1; /* Efecto al pasar el mouse */
+}
+
+.results-box {
+    background-color: #cfcfcf;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 100%;
+
+    max-width: 575px;
+    margin: 0px auto 30px auto;
+    padding: 25px;
+
+    box-shadow: inset -4px -4px 0px #383938, inset 4px 4px 0px #fff;
+}
+
+.results-box h2{
+    text-align: center;
+    font-family: MinecraftFont;
+    font-weight: bold;
+}
+
+/* Contenedor principal que ocupa todo el ancho de la pantalla */
+.site-footer {
+    background-color: #1f1f1f;
+    border-top: 1px solid #141414;
+    padding: 40px 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+/* Contenedor interno centrado que alinea las columnas en fila */
+.footer-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Estilo para cada columna individual */
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+/* Tipografía de los títulos del footer */
+.footer-column h3, 
+.footer-column h4, 
+.footer-column ul, 
+.footer-column p {
+    width: 100%;
+    max-width: fit-content;
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Listas de enlaces minimalistas */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.footer-column ul li a {
+    color: #6c757d;
+    text-decoration: none; 
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+/* Efecto hover elegante al pasar el mouse por los links */
+.footer-column ul li a:hover {
+    color: #007bff;
+}
+
+/* Texto de branding */
+.footer-column p {
+    color: #6c757d;
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.footer-column .copyright {
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
