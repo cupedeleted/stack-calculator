@@ -21,7 +21,7 @@
 				<input
 				type="number"
 				id="blocks"
-				name="blocks"
+				name="quantity"
 				min="0"
 				required
 				placeholder=" "
@@ -46,14 +46,9 @@
 		<p>Stacks : <span th:text="${result.stacks()}">0</span></p>
 		<p>Half stack: <span th:text="${result.remainingItems()}">0</span></p>
     
-    <div class="result-line">
-        <span>Shulker boxes full: <strong th:text="${shulkerCount}">0</strong></span>
-        <span th:if="${shulkerCount > 0}">
-            <img th:each="i : ${#numbers.sequence(1, shulkerCount)}"
-                 src="/images/shulker_icon.png" 
-                 class="asset-icon" alt="Shulker">
-        </span>
-    </div>
+		<div class="result-line">
+			<span>Shulker boxes full: <strong th:text="${shulkerCount}">0</strong></span>
+		</div>
 
     <div class="result-line">
         <span>Double chest full: <strong th:text="${chestCount}">0</strong></span>
