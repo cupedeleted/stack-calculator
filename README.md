@@ -2,6 +2,9 @@
 ## Whats is stack calculator?
 "Stack Calculator" is a simple program that allows you to calculate items to stacks and their remainder.
 
+## How i can use this app?
+Using https://minecraft-stack-calculator.up.railway.app/
+
 ## Technologies used:
 Java 17, Spring Boot, Thymeleaf, HTML5, CSS3, Maven
 
