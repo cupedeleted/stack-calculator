@@ -1,7 +1,6 @@
 package com.minecalc.stack_calculator.service;
 
 import java.util.Set;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,7 +30,9 @@ public class CalculatorService {
 
 	public CalculatorResult calculate(long totalItems, String itemType) {
 		if (totalItems < 0) {
-			throw new IllegalArgumentException("La cantidad de ítems no puede ser negativa");
+			throw new IllegalArgumentException("The number of items cannot be negative");
+		} else if (totalItems >= 10000000) {
+			throw new IllegalArgumentException("The number of items cannot exceed 10,000,000.");
 		}
 
 		String normalizedItemType = normalizeItemType(itemType);
@@ -39,32 +40,19 @@ public class CalculatorService {
 
 		long stacks = totalItems / stackSize;
 		long remainingItems = totalItems % stackSize;
+		
 		long stackSlotsNeeded = stacks + (remainingItems > 0 ? 1 : 0);
 
-		ContainerBreakdown shulkerBreakdown = calculateContainerBreakdown(
-				stackSlotsNeeded,
-				SHULKER_STACK_SLOTS,
-				remainingItems
-		);
-		ContainerBreakdown doubleChestBreakdown = calculateContainerBreakdown(
-				stackSlotsNeeded,
-				DOUBLE_CHEST_STACK_SLOTS,
-				remainingItems
-		);
+		long totalShulkers = containersNeeded(stackSlotsNeeded, SHULKER_STACK_SLOTS);
+		long totalDoubleChests = containersNeeded(stackSlotsNeeded, DOUBLE_CHEST_STACK_SLOTS);
 
 		return new CalculatorResult(
 				normalizedItemType,
 				totalItems,
 				stacks,
 				remainingItems,
-				shulkerBreakdown.totalContainers(),
-				shulkerBreakdown.fullContainers(),
-				shulkerBreakdown.lastContainerFullStacks(),
-				shulkerBreakdown.lastContainerRemainingItems(),
-				doubleChestBreakdown.totalContainers(),
-				doubleChestBreakdown.fullContainers(),
-				doubleChestBreakdown.lastContainerFullStacks(),
-				doubleChestBreakdown.lastContainerRemainingItems()
+				totalShulkers,
+				totalDoubleChests
 		);
 	}
 
@@ -91,42 +79,8 @@ public class CalculatorService {
 		return itemType.trim().toLowerCase();
 	}
 
-	private static ContainerBreakdown calculateContainerBreakdown(
-			long stackSlotsNeeded,
-			int capacity,
-			long remainingItems
-	) {
-		if (stackSlotsNeeded == 0) {
-			return new ContainerBreakdown(0, 0, 0, 0);
-		}
-
-		long totalContainers = containersNeeded(stackSlotsNeeded, capacity);
-		long slotsInLastContainer = stackSlotsNeeded % capacity;
-		if (slotsInLastContainer == 0) {
-			slotsInLastContainer = capacity;
-		}
-
-		boolean lastContainerCompletelyFull = slotsInLastContainer == capacity && remainingItems == 0;
-		long fullContainers = lastContainerCompletelyFull ? totalContainers : totalContainers - 1;
-		long lastContainerFullStacks = slotsInLastContainer - (remainingItems > 0 ? 1 : 0);
-
-		return new ContainerBreakdown(
-				totalContainers,
-				fullContainers,
-				lastContainerFullStacks,
-				remainingItems
-		);
-	}
-
 	private static long containersNeeded(long stackSlotsNeeded, int capacity) {
+		if (stackSlotsNeeded == 0) return 0;
 		return (stackSlotsNeeded + capacity - 1) / capacity;
-	}
-
-	private record ContainerBreakdown(
-			long totalContainers,
-			long fullContainers,
-			long lastContainerFullStacks,
-			long lastContainerRemainingItems
-	) {
 	}
 }

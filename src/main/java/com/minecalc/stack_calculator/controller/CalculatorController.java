@@ -17,7 +17,7 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/calculator")
     public String showCalculator(Model model) {
         model.addAttribute("totalItems", 0);
         model.addAttribute("shulkerCount", 0);
@@ -26,14 +26,25 @@ public class CalculatorController {
         return "index";
     }
 
-    @PostMapping("/calculate")
-    public String calculateStacks(@RequestParam int quantity, @RequestParam String itemType, Model model) {
-        CalculatorResult result = calculatorService.calculate(quantity, itemType);
+    @PostMapping("/result")
+    public String calculateStacks(@RequestParam int blocks, @RequestParam String itemType, Model model) {
+        model.addAttribute("totalItems", blocks);
+        model.addAttribute("itemType", itemType);
+
+        try {
+            CalculatorResult result = calculatorService.calculate(blocks, itemType);
         
-        model.addAttribute("totalItems", quantity);
-        model.addAttribute("shulkerCount", result.shulkerBoxes());
-        model.addAttribute("chestCount", result.doubleChests());
+            model.addAttribute("result", result);
+            model.addAttribute("shulkerCount", result.shulkerBoxes());
+            model.addAttribute("chestCount", result.doubleChests());
         
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        
+            model.addAttribute("shulkerCount", 0);
+            model.addAttribute("chestCount", 0);
+        }
+
         return "index";
     }
 }

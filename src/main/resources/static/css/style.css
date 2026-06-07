@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('../images/backgr.jpg');
+    background-image: url('../images/1370592.jpeg');
 
     background-repeat: no-repeat;
 
@@ -46,7 +46,6 @@ body {
     box-shadow: inset -4px -4px 0px #383938, inset 4px 4px 0px #fff;
 }
 
-/* 2. Estilo interno para que el formulario use Flexbox */
 .form-container form {
     display: flex;
     flex-wrap: wrap;
@@ -56,7 +55,6 @@ body {
     margin: 0;
 }
 
-/* 3. Organizar las etiquetas arriba de las barras */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -64,18 +62,16 @@ body {
     font-family: 'MinecraftFont', sans-serif;
 }
 
-/* 4. Estilizar las barras de texto y el selector */
 .form-group input, .form-group select {
     padding: 10px;
     font-family: 'MinecraftFont', sans-serif;
     font-size: 16px;
-    border: 2px solid;
-    background-color: #9d9d9d;
+    border: 3px solid;
+    background-color: #8b8b8b;
 
-    box-shadow: inset -4px -4px 0px #e4e3e3, inset 4px 4px 0px #bbbaba;
+    border-color: #373737 #ffffff #ffffff #373737;
 }
 
-/* 5. El botón estilo piedra de Minecraft */
 .mc-button {
     padding: 10px 20px;
     background-color: #929292;
@@ -114,18 +110,50 @@ body {
     font-weight: bold;
 }
 
-.result-line {
+/* Contenedor */
+.inventory-status {
     display: flex;
-    align-items: center;
-    gap: 10;
-    margin-bottom: 12px;
-    font-family: 'MinecraftFont', sans-serif;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    padding-left: 10px;
 }
 
-.assets-icon {
-    width: 30px;
-    height: 30px;
+/* Fila que junta el slot con su respectivo texto */
+.inventory-slot-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Slot de Minecraft */
+.mc-slot {
+    width: 55px;
+    height: 55px;
+    background-color: #8b8b8b;
+    border: 3px solid;
+    border-color: #373737 #ffffff #ffffff #373737;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Ajuste de los iconos para que se vean pixelados y nítidos */
+.slot-icon {
+    width: 45px;
+    height: 45px;
     image-rendering: pixelated;
+}
+
+.slot-text {
+    font-family: 'MinecraftFont', sans-serif;
+    font-size: 16px;
+    color: #1c1c1c;
+}
+.slot-text strong {
+    font-size: 18px;
+    color: #000000;
 }
 
 /* Contenedor principal */
@@ -209,4 +237,30 @@ body {
     font-size: 12px;
     margin-top: 15px;
     margin-bottom: 0;
+}
+
+.mc-error-box {
+    background-color: #2a0000;
+    border: 3px solid #ff2222;
+    padding: 12px 20px;
+    margin: 15px auto;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.error-icon {
+    color: #ff2222;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mc-error-box p {
+    color: #ffffff;
+    font-family: 'MinecraftFont', sans-serif;
+    font-size: 14px;
+    margin: 0;
 }
