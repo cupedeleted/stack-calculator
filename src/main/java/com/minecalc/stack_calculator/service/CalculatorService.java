@@ -54,7 +54,6 @@ public class CalculatorService {
 
 		return new CalculatorResult(
 				normalizedItemType,
-				stackSize,
 				totalItems,
 				stacks,
 				remainingItems,

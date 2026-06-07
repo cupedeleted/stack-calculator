@@ -89,7 +89,7 @@ body {
 }
 
 .mc-button:hover {
-    background-color: #a1a1a1; /* Efecto al pasar el mouse */
+    background-color: #a1a1a1;
 }
 
 .results-box {
@@ -128,7 +128,7 @@ body {
     image-rendering: pixelated;
 }
 
-/* Contenedor principal que ocupa todo el ancho de la pantalla */
+/* Contenedor principal */
 .site-footer {
     background-color: #1f1f1f;
     border-top: 1px solid #141414;
@@ -138,7 +138,7 @@ body {
     margin-top: auto;
 }
 
-/* Contenedor interno centrado que alinea las columnas en fila */
+/* Contenedor interno */
 .footer-container {
     max-width: 900px;
     margin: 0 auto;
@@ -160,7 +160,7 @@ body {
     text-align: left;
 }
 
-/* Tipografía de los títulos del footer */
+/* Tipografía del footer */
 .footer-column h3, 
 .footer-column h4, 
 .footer-column ul, 
@@ -173,7 +173,7 @@ body {
     font-weight: 600;
 }
 
-/* Listas de enlaces minimalistas */
+/* Listas de enlaces */
 .footer-column ul {
     list-style: none;
     padding: 0;
@@ -192,7 +192,7 @@ body {
     transition: color 0.2s ease;
 }
 
-/* Efecto hover elegante al pasar el mouse por los links */
+/* Efecto hover para los links */
 .footer-column ul li a:hover {
     color: #007bff;
 }
