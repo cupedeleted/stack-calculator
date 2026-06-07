@@ -11,27 +11,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CalculatorController {
 
-	private final CalculatorService calculatorService;
+    private final CalculatorService calculatorService;
 
-	public CalculatorController(CalculatorService calculatorService) {
-		this.calculatorService = calculatorService;
-	}
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
 
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
+    @GetMapping("/")
+    public String showCalculator(Model model) {
+        model.addAttribute("totalItems", 0);
+        model.addAttribute("shulkerCount", 0);
+        model.addAttribute("chestCount", 0);
+        
+        return "index";
+    }
 
-	@PostMapping("/calculate")
-	public String calculate(
-			@RequestParam("blocks") long blocks,
-			@RequestParam(value = "itemType", defaultValue = "default") String itemType,
-			Model model
-	) {
-		CalculatorResult result = calculatorService.calculate(blocks, itemType);
-		model.addAttribute("blocks", blocks);
-		model.addAttribute("itemType", itemType);
-		model.addAttribute("result", result);
-		return "index";
-	}
+    @PostMapping("/calculate")
+    public String calculateStacks(@RequestParam int quantity, @RequestParam String itemType, Model model) {
+        CalculatorResult result = calculatorService.calculate(quantity, itemType);
+        
+        model.addAttribute("totalItems", quantity);
+        model.addAttribute("shulkerCount", result.shulkerBoxes());
+        model.addAttribute("chestCount", result.doubleChests());
+        
+        return "index";
+    }
 }
