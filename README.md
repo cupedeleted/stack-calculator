@@ -6,7 +6,7 @@
 Using https://minecraft-stack-calculator.up.railway.app/
 
 ## Technologies used:
-Java 17, Spring Boot, Thymeleaf, HTML5, CSS3, Maven
+Java 21, Spring Boot, Thymeleaf, HTML5, CSS3, Maven
 
 ## Sample images
 
