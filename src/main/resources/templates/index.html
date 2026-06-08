@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Stacks Calculator - Minecraft</title>
 	<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div>
@@ -20,7 +21,7 @@
 	</div>
 
 	<div class="form-container">
-		<form th:action="@{/result}" method="post">
+		<form id="calculatorForm">
 			<div class="form-group">
 				<label for="blocks">Number of items:</label>
 				<input
@@ -30,7 +31,7 @@
 				min="0"
 				required
 				placeholder="0"
-				th:value="${totalItems != null ? totalItems : ''}">
+				th:value="${totalItems != null && totalItems > 0 ? totalItems : ''}">
 			</div>
 			
 			<div class="form-group">
@@ -95,5 +96,50 @@
 			</div>
 		</div>
 	</footer>
+
+	<!--JAVASCRIPT Evita parpadeo y recarga completa de la pagina.-->
+	<script>
+		document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+			event.preventDefault(); 
+		
+			const blocks = document.getElementsByName('blocks')[0].value;
+			const itemType = document.getElementsByName('itemType')[0].value;
+
+		// envio de datos en segundo plano al controlador
+			fetch('/result', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: `blocks=${blocks}&itemType=${itemType}`
+			})
+			.then(response => response.text())
+			.then(htmlText => {
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(htmlText, 'text/html');
+		
+				const newResults = doc.querySelector('.results-box');
+				if (newResults) {
+					document.querySelector('.results-box').innerHTML = newResults.innerHTML;
+				}
+		
+				const newError = doc.querySelector('.mc-error-box');
+				const currentErrorContainer = document.querySelector('.mc-error-box');
+		
+				if (newError) {
+					if (currentErrorContainer) {
+						currentErrorContainer.innerHTML = newError.innerHTML;
+						currentErrorContainer.style.display = 'flex';
+					} else {
+						const formContainer = document.querySelector('.form-container');
+						formContainer.insertAdjacentHTML('beforebegin', newError.outerHTML);
+					}
+				} else if (currentErrorContainer) {
+					currentErrorContainer.remove();
+				}
+			})
+			.catch(error => console.error('Error en el cálculo asíncrono:', error));
+		});
+		</script>
 </body>
 </html>
